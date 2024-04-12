@@ -144,14 +144,14 @@ void SmtpClient::login(const QString &user, const QString &password, AuthMethod 
     login();
 }
 
-void SmtpClient::sendMail(const MimeMessage & email)
+void SmtpClient::sendMail(std::shared_ptr<MimeMessage> email)
 {
     if (!isReadyConnected)
         return;
 
     isMailSent = false;
 
-    this->email = &email;
+    this->email = email;
     this->rcptType = 0;
     changeState(MailSendingState);
 }

@@ -133,7 +133,7 @@ public:
 
     void connectToHost();
     void login(const QString &user, const QString &password, AuthMethod method = AuthLogin);
-    void sendMail(const MimeMessage & email);
+    void sendMail(std::shared_ptr<MimeMessage> email);
     void quit();
     void reset();
 
