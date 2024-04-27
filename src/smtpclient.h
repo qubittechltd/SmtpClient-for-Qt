@@ -179,7 +179,7 @@ protected:
     bool isMailSent;
     bool isReset;
 
-    const MimeMessage *email;
+    std::shared_ptr<MimeMessage> email;
 
     int rcptType;
     enum _RcptType { _TO = 1, _CC = 2, _BCC = 3};
