@@ -19,6 +19,7 @@ message(USING QT${QT_VERSION_MAJOR})
 add_library(${PROJECT_NAME} SHARED
     emailaddress.cpp
     mimeattachment.cpp
+    mimebytearrayattachment.cpp
     mimefile.cpp
     mimehtml.cpp
     mimeinlinefile.cpp
@@ -36,6 +37,7 @@ add_library(${PROJECT_NAME} SHARED
     mimecontentformatter.cpp
     emailaddress.h
     mimeattachment.h
+    mimebytearrayattachment.h
     mimefile.h
     mimehtml.h
     mimeinlinefile.h
