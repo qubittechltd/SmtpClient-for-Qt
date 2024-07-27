@@ -59,6 +59,11 @@ void MimeMessage::setSender(const EmailAddress &sender)
     this->sender = sender;
 }
 
+void MimeMessage::setReplyTo(const EmailAddress &replyTo)
+{
+    this->replyTo = replyTo;
+}
+
 void MimeMessage::addRecipient(const EmailAddress &rcpt, RecipientType type)
 {
     switch (type)
@@ -112,6 +117,11 @@ void MimeMessage::setHeaderEncoding(MimePart::Encoding hEnc)
 EmailAddress MimeMessage::getSender() const
 {
     return sender;
+}
+
+EmailAddress MimeMessage::getReplyTo() const
+{
+    return replyTo;
 }
 
 const QList<EmailAddress> & MimeMessage::getRecipients(RecipientType type) const
@@ -191,6 +201,12 @@ void MimeMessage::writeToDevice(QIODevice &out) const {
     /* ---------- Sender / From ----------- */
     QByteArray header;
     header.append("From:" + formatAddress(sender, hEncoding) + "\r\n");
+    /* ---------------------------------- */
+
+    /* ---------- Reply-To ----------- */
+    if (!replyTo.getAddress().isEmpty()) {
+      header.append("Reply-To:" + formatAddress(replyTo, hEncoding) + "\r\n");
+    }
     /* ---------------------------------- */
 
     /* ------- Recipients / To ---------- */
