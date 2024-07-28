@@ -107,16 +107,14 @@ void SendEmail::on_sendEmail_clicked()
     message.addPart(&content);
 
     QList<QFile*> files;
-    QList<MimeAttachment*> attachments;
     for (int i = 0; i < ui->attachments->count(); ++i)
     {
         QFile* file = new QFile(ui->attachments->item(i)->text());
         files.append(file);
 
         MimeAttachment* attachment = new MimeAttachment(file);
-        attachments.append(attachment);
 
-        message.addPart(attachment);
+        message.addPart(attachment, true);
     }
 
     smtp.connectToHost();
@@ -154,11 +152,6 @@ void SendEmail::on_sendEmail_clicked()
     for (auto file : files) {
         delete file;
     }
-
-    for (auto attachment : attachments) {
-        delete attachment;
-    }
-
 }
 
 void SendEmail::errorMessage(const QString &message)

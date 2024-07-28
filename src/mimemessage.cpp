@@ -22,6 +22,7 @@
 #include <QDateTime>
 #include <QBuffer>
 #include "quotedprintable.h"
+#include "mimemultipart.h"
 #include <typeinfo>
 
 /* [1] Constructors and Destructors */
@@ -102,10 +103,14 @@ void MimeMessage::setSubject(const QString & subject)
     this->subject = subject;
 }
 
-void MimeMessage::addPart(MimePart *part)
+void MimeMessage::addPart(MimePart *part) {
+    this->addPart(part, false);
+}
+
+void MimeMessage::addPart(MimePart *part, const bool takeOwnership)
 {
     if (typeid(*content) == typeid(MimeMultiPart)) {
-        ((MimeMultiPart*) content)->addPart(part);
+        ((MimeMultiPart*) content)->addPart(part, takeOwnership);
     };
 }
 

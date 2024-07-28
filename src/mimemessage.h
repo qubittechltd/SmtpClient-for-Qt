@@ -25,7 +25,6 @@
 
 #include "smtpmime_global.h"
 #include "mimepart.h"
-#include "mimemultipart.h"
 #include "emailaddress.h"
 
 class SMTP_MIME_EXPORT MimeMessage : public QObject
@@ -57,6 +56,7 @@ public:
     void addCustomHeader(const QString &hdr);
     void setSubject(const QString &subject);
     void addPart(MimePart* part);
+    void addPart(MimePart* part, const bool takeOwnership);
 
     void setHeaderEncoding(MimePart::Encoding);
 
