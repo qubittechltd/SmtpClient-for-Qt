@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
-project(SmtpMime VERSION 0.1 LANGUAGES CXX)
+project(SmtpMime VERSION 2.0 LANGUAGES C CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -14,9 +14,9 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network REQUIRED)
 
 add_compile_options(-DSMTP_MIME_LIBRARY)
 
-message(USING QT${QT_VERSION_MAJOR})
+message(USING Qt${QT_VERSION_MAJOR})
 
-add_library(${PROJECT_NAME} SHARED
+qt_add_library(${PROJECT_NAME} SHARED
     emailaddress.cpp
     mimeattachment.cpp
     mimebytearrayattachment.cpp
@@ -98,12 +98,14 @@ set(public_headers
     mimebytearrayattachment.h
 )
 # note that ${public_headers} has to be in quotes
-set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${public_headers}")
+set_target_properties(${PROJECT_NAME} PROPERTIES
+	VERSION ${PROJECT_VERSION}
+	SOVERSION ${PROJECT_VERSION_MAJOR}
+	PUBLIC_HEADER "${public_headers}"
+)
 
 include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/smtpmime
 )
