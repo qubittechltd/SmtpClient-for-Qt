@@ -44,13 +44,20 @@ MimeMultiPart::MimeMultiPart(MultiPartType type)
 }
 
 MimeMultiPart::~MimeMultiPart() {
-    foreach (MimePart *part, parts) {
+    foreach (MimePart *part, ownedParts) {
         delete part;
     }
 }
 
 void MimeMultiPart::addPart(MimePart *part) {
+    this->addPart(part, false);
+}
+
+void MimeMultiPart::addPart(MimePart *part, const bool takeOwnership) {
     parts.append(part);
+    if (takeOwnership) {
+        ownedParts.append(part);
+    }
 }
 
 const QList<MimePart*> & MimeMultiPart::getParts() const {

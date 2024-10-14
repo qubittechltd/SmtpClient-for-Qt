@@ -60,12 +60,16 @@ public:
 
     void addPart(MimePart *part);
 
+    void addPart(MimePart *part, const bool takeOwnership);
+
     void writeContent(QIODevice &device) const;
 
     /* [3] --- */
 
 protected:
     QList< MimePart* > parts;
+
+    QList< MimePart* > ownedParts;
 
     MultiPartType type;
     

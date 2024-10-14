@@ -21,6 +21,7 @@ DEFINES += SMTP_MIME_LIBRARY
 SOURCES += \
     emailaddress.cpp \
     mimeattachment.cpp \
+    mimebytearrayattachment.cpp \
     mimefile.cpp \
     mimehtml.cpp \
     mimeinlinefile.cpp \
@@ -40,6 +41,7 @@ SOURCES += \
 HEADERS  += \
     emailaddress.h \
     mimeattachment.h \
+    mimebytearrayattachment.h \
     mimefile.h \
     mimehtml.h \
     mimeinlinefile.h \
